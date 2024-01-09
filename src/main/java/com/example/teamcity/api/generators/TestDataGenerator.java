@@ -1,14 +1,21 @@
 package com.example.teamcity.api.generators;
 
-import com.example.teamcity.api.models.User;
-import com.example.teamcity.api.models.Project;
-import com.example.teamcity.api.models.NewProjectDescription;
+import com.example.teamcity.api.models.*;
+
+import java.util.Arrays;
 
 public class TestDataGenerator {
     public TestData generate() {
         var user = User.builder()
-                .username("admin")
-                .password("admin")
+                .username(RandomData.getString())
+                .password(RandomData.getString())
+                .email(RandomData.getString() + "@gmail.com")
+                .roles(Roles.builder()
+                        .role(Arrays.asList(Role.builder()
+                                .roleId("SYSTEM_ADMIN")
+                                .scope("g")
+                                .build()))
+                        .build())
                 .build();
         var project = NewProjectDescription
                 .builder()

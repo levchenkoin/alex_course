@@ -3,6 +3,8 @@ package com.example.teamcity.api.generators;
 import com.example.teamcity.api.models.NewProjectDescription;
 import com.example.teamcity.api.models.User;
 import com.example.teamcity.api.requests.unchecked.UncheckedProject;
+import com.example.teamcity.api.requests.unchecked.UncheckedUser;
+import com.example.teamcity.api.spec.Specifications;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +15,8 @@ public class TestData {
     private NewProjectDescription project;
 
     public void delete() {
-        new UncheckedProject(user).delete(project.getId());
+        var spec = Specifications.getSpec().authSpec(user);
+        new UncheckedProject(spec).delete(project.getId());
+        new UncheckedUser(spec).delete(user.getUsername());
     }
 }

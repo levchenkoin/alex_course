@@ -1,32 +1,31 @@
 package com.example.teamcity.api.requests.unchecked;
 
-import com.example.teamcity.api.models.User;
 import com.example.teamcity.api.requests.CrudInterface;
-import com.example.teamcity.api.spec.Specifications;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
 public class UncheckedProject implements CrudInterface {
 
     private static final String PROJECT_ENDPOINT = "/app/rest/projects";
-    private User user;
+    private RequestSpecification spec;
 
-    public UncheckedProject(User user) {
-        this.user = user;
+    public UncheckedProject(RequestSpecification user) {
+        this.spec = user;
     }
 
     @Override
     public Response create(Object obj) {
         return given()
-                .spec(Specifications.getSpec().authSpec(user))
+                .spec(spec)
                 .body(obj)
                 .post(PROJECT_ENDPOINT);
     }
 
     @Override
-    public Object get(String id) {
-        return null;
+    public Response get(String id) {
+        return given().spec(spec).get(PROJECT_ENDPOINT + "/id:" + id);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class UncheckedProject implements CrudInterface {
     @Override
     public Response delete(String id) {
         return given()
-                .spec(Specifications.getSpec().authSpec(user))
+                .spec(spec)
                 .delete(PROJECT_ENDPOINT + "/id:" + id);
     }
 }

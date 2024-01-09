@@ -7,7 +7,6 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import org.apache.http.client.methods.RequestBuilder;
 
 public class Specifications {
     private static Specifications spec;
@@ -24,6 +23,7 @@ public class Specifications {
 
     private RequestSpecBuilder reqBuilder() {
         var requestBuilder = new RequestSpecBuilder();
+        requestBuilder.setBaseUri("http://" + Config.getProperty("host"));
         requestBuilder.addFilter(new RequestLoggingFilter());
         requestBuilder.addFilter(new ResponseLoggingFilter());
         requestBuilder.setContentType(ContentType.JSON);
@@ -39,6 +39,12 @@ public class Specifications {
     public RequestSpecification authSpec(User user) {
         var requestBuilder = reqBuilder();
         requestBuilder.setBaseUri("http://" + user.getUsername() + ":" + user.getPassword() + "@" + Config.getProperty("host"));
+        return requestBuilder.build();
+    }
+
+    public RequestSpecification superUserSpec() {
+        var requestBuilder = reqBuilder();
+        requestBuilder.setBaseUri("http://:" + Config.getProperty("superUserToken") + "@" + Config.getProperty("host"));
         return requestBuilder.build();
     }
 }
