@@ -7,25 +7,27 @@ import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
-public class UncheckedProject extends Request implements CrudInterface {
+public class UncheckedBuildConfig extends Request implements CrudInterface {
+    private static final String BUILD_CONFIG_ENDPOINT = "/app/rest/buildTypes";
 
-    private static final String PROJECT_ENDPOINT = "/app/rest/projects";
-
-    public UncheckedProject(RequestSpecification spec) {
+    public UncheckedBuildConfig(RequestSpecification spec) {
         super(spec);
     }
+
 
     @Override
     public Response create(Object obj) {
         return given()
                 .spec(spec)
                 .body(obj)
-                .post(PROJECT_ENDPOINT);
+                .post(BUILD_CONFIG_ENDPOINT);
     }
 
     @Override
     public Response get(String id) {
-        return given().spec(spec).get(PROJECT_ENDPOINT + "/id:" + id);
+        return given()
+                .spec(spec)
+                .get(BUILD_CONFIG_ENDPOINT + "/id:" + id);
     }
 
     @Override
@@ -33,11 +35,9 @@ public class UncheckedProject extends Request implements CrudInterface {
         return null;
     }
 
-
     @Override
     public Response delete(String id) {
-        return given()
-                .spec(spec)
-                .delete(PROJECT_ENDPOINT + "/id:" + id);
+        return given().spec(spec)
+                .delete(BUILD_CONFIG_ENDPOINT + "/id:" + id);
     }
 }

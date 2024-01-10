@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 public class BuildConfigurationTest extends BaseApiTest {
     @Test
     public void buildConfigurationTest() {
+        var testData = testDataStorage.addTestData();
 
         new CheckedUser(Specifications.getSpec().superUserSpec())
                 .create(testData.getUser());
