@@ -22,13 +22,14 @@ public class CheckedProject extends Request implements CrudInterface {
 
     @Override
     public Project get(String id) {
-        return new UncheckedProject(spec).get(id)
+        return new UncheckedProject(spec)
+                .get(id)
                 .then().assertThat().statusCode(HttpStatus.SC_OK)
                 .extract().as(Project.class);
     }
 
     @Override
-    public Object update(Object obj) {
+    public Object update(String id, Object obj) {
         return null;
     }
 
