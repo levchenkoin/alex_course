@@ -21,6 +21,7 @@
         <google-gson.version>2.10.1</google-gson.version>
         <assertj-core.version>3.22.0</assertj-core.version>
         <selenide.version>7.0.2</selenide.version>
+        <awaitility.version>4.1.0</awaitility.version>
     </properties>
 
     <dependencies>
@@ -84,6 +85,12 @@
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -102,6 +109,10 @@
                             <value>${project.build.directory}/allure-results</value>
                         </property>
                     </systemProperties>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>testng-suites/api-suite.xml</suiteXmlFile>
+                            <suiteXmlFile>testng-suites/ui-suite.xml</suiteXmlFile>
+                        </suiteXmlFiles>
                 </configuration>
                 <dependencies>
                     <dependency>
