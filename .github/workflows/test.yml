@@ -56,7 +56,7 @@ jobs:
           docker run -u 0 -d --name teamcity-server \
           -v $(pwd)/tmp/teamcity_server/datadir:/data/teamcity_server/datadir \
           -v $(pwd)/tmp/teamcity_server/logs:/opt/teamcity/logs \
-          -p 8111:8111 \
+          -p 8112:8111 \
           jetbrains/teamcity-server:2023.11.1
 
       - name: Set up TeamCity server
@@ -82,4 +82,4 @@ jobs:
 
       - name: Run tests
         # Указываем группу, чтобы еще раз не запустить тесты, которые использовались для сетапа сервера и агента
-        run: ./mvnw test -Dgroups=Regression
+        run: ./mvnw test -DsuiteXmlFile=testng-suites/api-suite.xml
