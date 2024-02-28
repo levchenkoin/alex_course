@@ -26,7 +26,7 @@ jobs:
         run: printf "\nhost=$HOST:8111\nbrowser=firefox\nremote=http://$HOST:4444/wd/hub" > src/main/resources/config.properties
 
       - name: Pull Selenoid Chrome/Firefox/..
-        run: docker pull selenoid/vnc:firefox_89.0
+        run: docker pull selenoid/vnc:firefox_119.0
 
       - name: Run Selenoid
         # Флаг -d запускает контейнер в фоновом режиме (так как, например, контейнер с сервером не имеет окончания, он просто всегда включен,
@@ -58,6 +58,9 @@ jobs:
           -v $(pwd)/tmp/teamcity_server/logs:/opt/teamcity/logs \
           -p 8112:8111 \
           jetbrains/teamcity-server:2023.11.1
+
+      - name: Set execute permissions for mvnw
+        run: chmod +x mvnw
 
       - name: Set up TeamCity server
         # Настройка сервера при первом запуске (принятие лицензии, выбор базы данных и т.д.), реализованная в виде теста
