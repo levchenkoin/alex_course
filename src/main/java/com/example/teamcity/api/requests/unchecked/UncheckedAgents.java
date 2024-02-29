@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
+import static java.lang.String.format;
 
 public class UncheckedAgents extends Request implements CrudInterface {
 
@@ -21,9 +22,15 @@ public class UncheckedAgents extends Request implements CrudInterface {
     }
 
     @Override
-    public Response get(String id) {
-        return null;
+    public Response get(String locator) {
+        return given().spec(spec)
+                .param("locator", locator)
+                .get(AGENTS_ENDPOINT);
     }
+
+//    public Response get(String id) {
+//        return null;
+//    }
 
     @Override
     public Object update(String id, Object obj) {
@@ -35,20 +42,11 @@ public class UncheckedAgents extends Request implements CrudInterface {
         return null;
     }
 
-    public Response getAllUnauthorizedAgents(){
-        return given().spec(spec)
-                .get(AGENTS_ENDPOINT + "?locator=enabled:true,authorized:false");
-    }
-    public Response getAllAuthorizedAgents(){
-        return given().spec(spec)
-                .get(AGENTS_ENDPOINT + "?locator=connected:true,authorized:true");
-    }
-
-    public Response updateAgentAuthorizationToTrue(String name){
+    public Response authorize(String agentId) {
         return given().spec(spec)
                 .contentType("text/plain")
-                .accept("text/plain")
-                .body(String.valueOf(true))
-                .put(AGENTS_ENDPOINT + "/" + name + "/authorized");
+                .accept("*/*")
+                .body("true")
+                .put(format("%s/id:%s/authorized", AGENTS_ENDPOINT, agentId));
     }
 }
