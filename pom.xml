@@ -112,6 +112,8 @@
                     </systemProperties>
                         <suiteXmlFiles>
                             <suiteXmlFile>testng-suites/${suiteXmlFile}</suiteXmlFile>
+                            <suiteXmlFile>testng-suites/api-suite</suiteXmlFile>
+                            <suiteXmlFile>testng-suites/ui-suite</suiteXmlFile>
                         </suiteXmlFiles>
                 </configuration>
                 <dependencies>
