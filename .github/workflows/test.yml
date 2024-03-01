@@ -72,7 +72,7 @@ jobs:
 
       - name: Set up superUserToken config property
         run: |
-          echo "superUserToken=$SUPER_USER_TOKEN" >> src/main/resources/config.properties \
+          echo -e "superUserToken=$SUPER_USER_TOKEN\n" >> src/main/resources/config.properties \
           && cat src/main/resources/config.properties
 
       - name: Run TeamCity agent
