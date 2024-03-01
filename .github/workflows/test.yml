@@ -85,4 +85,4 @@ jobs:
 
       - name: Run tests
         # Указываем группу, чтобы еще раз не запустить тесты, которые использовались для сетапа сервера и агента
-        run: ./mvnw test -DsuiteXmlFile=api-suite.xml
+        run: ./mvnw test -DsuiteXmlFile=testng-suites/api-suite.xml
