@@ -155,7 +155,6 @@ public class RolesTest extends BaseApiTest {
 
         softy.assertThat(buildType.getId()).isEqualTo(testData.getBuildType().getId());
     }
-
     @Test
     public void projectDeveloperShouldNotHaveRightsToCreateBuildConfigToAnotherProject() {
         var firstTestData = testDataStorage.addTestData();
