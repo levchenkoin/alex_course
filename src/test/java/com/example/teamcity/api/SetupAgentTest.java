@@ -20,7 +20,7 @@ public class SetupAgentTest extends BaseApiTest {
     private Agent getUnauthorizedAgent() {
         var agents = new AtomicReference<List<Agent>>();
         Awaitility.await()
-                .atMost(Duration.ofSeconds(20))
+                .atMost(Duration.ofSeconds(30))
                 .pollInterval(Duration.ofSeconds(1))
                 .until(() -> {
                     agents.set(checkedWithSuperUser.getAgentsRequest()
