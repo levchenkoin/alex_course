@@ -1,14 +1,16 @@
 package com.example.teamcity.api;
 
 import com.example.teamcity.api.models.Agent;
-import org.awaitility.Awaitility;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static org.awaitility.Awaitility.await;
+
 public class SetupAgentTest extends BaseApiTest {
+
     @Test
     public void authorizeAgent() {
         var agentId = getUnauthorizedAgent().getId();
@@ -19,7 +21,7 @@ public class SetupAgentTest extends BaseApiTest {
 
     private Agent getUnauthorizedAgent() {
         var agents = new AtomicReference<List<Agent>>();
-        Awaitility.await()
+        await()
                 .atMost(Duration.ofSeconds(30))
                 .pollInterval(Duration.ofSeconds(1))
                 .until(() -> {
