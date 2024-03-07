@@ -24,6 +24,7 @@
         <awaitility.version>4.1.0</awaitility.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <suiteXmlFile>default-suite.xml</suiteXmlFile>
+        <swagger-coverage-rest-assured.version>1.5.0</swagger-coverage-rest-assured.version>
     </properties>
 
     <dependencies>
@@ -92,6 +93,11 @@
             <artifactId>awaitility</artifactId>
             <version>${awaitility.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.viclovsky</groupId>
+            <artifactId>swagger-coverage-rest-assured</artifactId>
+            <version>${swagger-coverage-rest-assured.version}</version>
         </dependency>
     </dependencies>
     <build>
