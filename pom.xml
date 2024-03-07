@@ -26,6 +26,7 @@
         <suiteXmlFile>default-suite.xml</suiteXmlFile>
         <swagger-coverage-rest-assured.version>1.5.0</swagger-coverage-rest-assured.version>
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+        <allure-rest-assured.version>2.25.0</allure-rest-assured.version>
     </properties>
 
     <dependencies>
@@ -99,6 +100,11 @@
             <groupId>com.github.viclovsky</groupId>
             <artifactId>swagger-coverage-rest-assured</artifactId>
             <version>${swagger-coverage-rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure-rest-assured.version}</version>
         </dependency>
     </dependencies>
     <build>
