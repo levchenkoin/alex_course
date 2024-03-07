@@ -21,7 +21,6 @@ jobs:
         continue-on-error: true
 
   run_teamcity_tests:
-    needs: checkstyle
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
