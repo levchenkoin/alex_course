@@ -3,7 +3,23 @@ name: TeamCity tests
 on: push
 
 jobs:
+  checkstyle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      - name: Validate Checkstyle
+        run: |
+          chmod +x mvnw && \
+          ./mvnw validate -Dcheckstyle.failOnViolation=false
+
   run_teamcity_tests:
+    needs: checkstyle
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
