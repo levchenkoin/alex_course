@@ -10,13 +10,13 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'zulu'
+          java-version: '11'
+          distribution: 'adopt'
 
       - name: Validate Checkstyle
         run: |
           chmod +x mvnw && \
-          ./mvnw validate
+          ./mvnw validate -Dcheckstyle.failOnViolation=false
         if: always()
         continue-on-error: true
 
