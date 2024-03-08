@@ -13,6 +13,8 @@ import io.restassured.specification.RequestSpecification;
 
 import java.nio.file.Paths;
 
+import static com.github.viclovsky.swagger.coverage.SwaggerCoverageConstants.OUTPUT_DIRECTORY;
+
 public class Specifications {
     private static Specifications spec;
 
@@ -32,7 +34,9 @@ public class Specifications {
         requestBuilder.addFilter(new RequestLoggingFilter());
         requestBuilder.addFilter(new ResponseLoggingFilter());
         requestBuilder.addFilter(new AllureRestAssured());
-        requestBuilder.addFilter(new SwaggerCoverageRestAssured(new FileSystemOutputWriter(Paths.get("target/swagger-coverage"))));
+        //requestBuilder.addFilter(new SwaggerCoverageRestAssured(new FileSystemOutputWriter(Paths.get("target/swagger-coverage"))));
+        requestBuilder.addFilter(new SwaggerCoverageRestAssured(new FileSystemOutputWriter(Paths
+                .get("target/" + OUTPUT_DIRECTORY))));
         requestBuilder.setContentType(ContentType.JSON);
         requestBuilder.setAccept(ContentType.JSON);
         return requestBuilder;
